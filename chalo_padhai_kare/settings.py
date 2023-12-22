@@ -77,19 +77,24 @@ WSGI_APPLICATION = 'chalo_padhai_kare.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'railway',
+#         'USER': 'postgres',
+#         'PASSWORD': '1B3fcAgB6fa61aEgd5c*fC1cadadF*C2',
+#         'HOST': '35.213.135.65',
+#         'POST' : '27194',
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': '1B3fcAgB6fa61aEgd5c*fC1cadadF*C2',
-        'HOST': '35.213.135.65',
-        'POST' : '27194',
-    }
+    'default': dj_database_url.config(
+        default= config('DATABASE_URL'),
+        conn_max_age=600,
+        conn_health_checks=True,
+    )
 }
-
-DATABASES['default'] = dj_database_url.config()
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
